@@ -13,7 +13,7 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [
       {
@@ -27,13 +27,13 @@
     ],
     "keybindings": [
       {
-        "command": "extension.convertToStringsArray",
-        "key": "ctrl+alt+i",
-        "mac": "ctrl+alt+i",
+        "command": "ruby-percent-strings.convertToStringsArray",
+        "key": "ctrl+alt+w",
+        "mac": "ctrl+alt+w",
         "when": "editorTextFocus"
       },
       {
-        "command": "extension.convertToSymbolsArray",
+        "command": "ruby-percent-strings.convertToSymbolsArray",
         "key": "ctrl+alt+i",
         "mac": "ctrl+alt+i",
         "when": "editorTextFocus"
