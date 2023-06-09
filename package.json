@@ -12,16 +12,30 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "ruby-percent-strings.convertToStringArray",
-      "title": "Ruby Percent Strings: Convert to String Array"
-    }],
-    "keybindings": [{
-      "command": "extension.convertToStringArray",
-      "key": "ctrl+alt+w",
-      "mac": "ctrl+alt+w",
-      "when": "editorTextFocus"
-    }]
+    "commands": [
+      {
+        "command": "ruby-percent-strings.convertToStringsArray",
+        "title": "Ruby Percent Strings: Convert to Strings Array"
+      },
+      {
+        "command": "ruby-percent-strings.convertToSymbolsArray",
+        "title": "Ruby Percent Strings: Convert to Symbols Array"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.convertToStringsArray",
+        "key": "ctrl+alt+i",
+        "mac": "ctrl+alt+i",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.convertToSymbolsArray",
+        "key": "ctrl+alt+i",
+        "mac": "ctrl+alt+i",
+        "when": "editorTextFocus"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",

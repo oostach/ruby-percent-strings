@@ -16,12 +16,17 @@ function activate(context) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with  registerCommand
   // The commandId parameter must match the command field in package.json
-  const convertArray = function(text) {
+  const convertStringArray = function(text) {
     const escapedText = text.trim().replace(/[[\]",]/gi, '')
     return `%w(${escapedText})`
   }
 
-  const disposable = vscode.commands.registerCommand('ruby-percent-strings.convertToStringArray', function () {
+  const convertSymbolArray = function(text) {
+    const escapedText = text.trim().replace(/[[\]:,]/gi, '')
+    return `%i(${escapedText})`
+  }
+
+  const convertArray = function(converter) {
     const activeEditor = vscode.window.activeTextEditor
     if (!activeEditor) {
       vscode.window.showWarningMessage('Any open editor found!')
@@ -32,15 +37,21 @@ function activate(context) {
     if (selection && !selection.isEmpty) {
       const selectionRange = new vscode.Range(selection.start.line, selection.start.character, selection.end.line, selection.end.character)
       const selectedText = activeEditor.document.getText(selectionRange)
-      const convertedText = convertArray(selectedText)
+      const convertedText = converter(selectedText)
 
       activeEditor.edit(editBuilder => editBuilder.replace(selectionRange, convertedText))
     } else {
       vscode.window.showWarningMessage('No selection found!')
     }
-  })
+  }
 
-  context.subscriptions.push(disposable)
+  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToStringsArray', function () {
+    convertArray(convertStringArray)
+  }))
+
+  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToSymbolsArray', function () {
+    convertArray(convertSymbolArray)
+  }))
 }
 
 // This method is called when your extension is deactivated
