@@ -8,7 +8,7 @@ const vscode = require('vscode')
 /**
  * @param {vscode.ExtensionContext} context
  */
-function activate(context) {
+const activate = (context) => {
   const config = vscode.workspace.getConfiguration('ruby-percent-strings')
 
   const convertStringArray = (text) => {
@@ -64,17 +64,17 @@ function activate(context) {
     }
   }
 
-  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToStringsArray', function () {
+  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToStringsArray', () => {
     convertArray(convertStringArray)
   }))
 
-  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToSymbolsArray', function () {
+  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToSymbolsArray', () => {
     convertArray(convertSymbolArray)
   }))
 }
 
 // This method is called when your extension is deactivated
-function deactivate() {}
+const deactivate = () => {}
 
 module.exports = {
   activate,
