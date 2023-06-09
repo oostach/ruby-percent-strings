@@ -12,18 +12,35 @@ function activate(context) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "ruby-percent-strings" is now active!')
+  const config = vscode.workspace.getConfiguration('ruby-percent-strings')
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with  registerCommand
   // The commandId parameter must match the command field in package.json
   const convertStringArray = function(text) {
     const escapedText = text.trim().replace(/[[\]",]/gi, '')
-    return `%w(${escapedText})`
+    let result = null
+
+    if (config.get('stringBrackets') === 'square') {
+      result = `%w[${escapedText}]`
+    } else if (config.get('stringBrackets') === 'round') {
+      result = `%w(${escapedText})`
+    }
+
+    return result
   }
 
   const convertSymbolArray = function(text) {
     const escapedText = text.trim().replace(/[[\]:,]/gi, '')
-    return `%i(${escapedText})`
+    let result = null
+
+    if (config.get('symbolBrackets') === 'square') {
+      result = `%i[${escapedText}]`
+    } else if (config.get('symbolBrackets') === 'round') {
+      result = `%i(${escapedText})`
+    }
+
+    return result
   }
 
   const convertArray = function(converter) {

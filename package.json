@@ -35,7 +35,24 @@
         "mac": "ctrl+alt+i",
         "when": "editorTextFocus"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Ruby Percent Strings",
+      "properties": {
+        "ruby-percent-strings.stringBrackets": {
+          "type": "string",
+          "default": "round",
+          "enum": ["round", "square"],
+          "description": "Type of the brackets to wrap a strings array: round - `()` or square - `[]`"
+        },
+        "ruby-percent-strings.symbolBrackets": {
+          "type": "string",
+          "default": "round",
+          "enum": ["round", "square"],
+          "description": "Type of the brackets to wrap a symbols array: round - `()` or square - `[]`"
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",
