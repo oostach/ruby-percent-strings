@@ -9,16 +9,10 @@ const vscode = require('vscode')
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "ruby-percent-strings" is now active!')
   const config = vscode.workspace.getConfiguration('ruby-percent-strings')
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with  registerCommand
-  // The commandId parameter must match the command field in package.json
-  const convertStringArray = function(text) {
-    const escapedText = text.trim().replace(/[[\]",]/gi, '')
+  const convertStringArray = (text) => {
+    const escapedText = text.replace(/[[\]",]/gi, '')
     let result = null
 
     if (config.get('stringBrackets') === 'square') {
@@ -30,8 +24,8 @@ function activate(context) {
     return result
   }
 
-  const convertSymbolArray = function(text) {
-    const escapedText = text.trim().replace(/[[\]:,]/gi, '')
+  const convertSymbolArray = (text) => {
+    const escapedText = text.replace(/[[\]:,]/gi, '')
     let result = null
 
     if (config.get('symbolBrackets') === 'square') {
@@ -43,7 +37,11 @@ function activate(context) {
     return result
   }
 
-  const convertArray = function(converter) {
+  const isWrapped = (text) => {
+    return text.match(/^%i[[(]/i) || text.match(/^%w[[(]/i)
+  }
+
+  const convertArray = (converter) => {
     const activeEditor = vscode.window.activeTextEditor
     if (!activeEditor) {
       vscode.window.showWarningMessage('Any open editor found!')
@@ -53,9 +51,13 @@ function activate(context) {
 
     if (selection && !selection.isEmpty) {
       const selectionRange = new vscode.Range(selection.start.line, selection.start.character, selection.end.line, selection.end.character)
-      const selectedText = activeEditor.document.getText(selectionRange)
-      const convertedText = converter(selectedText)
+      const selectedText = activeEditor.document.getText(selectionRange).trim()
 
+      if (isWrapped(selectedText)) {
+        return
+      }
+
+      const convertedText = converter(selectedText)
       activeEditor.edit(editBuilder => editBuilder.replace(selectionRange, convertedText))
     } else {
       vscode.window.showWarningMessage('No selection found!')
