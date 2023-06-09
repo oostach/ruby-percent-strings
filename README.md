@@ -1,8 +1,7 @@
 # Ruby Percent Strings
 
-Ruby Percent Strings is a VS Code extension which helps easily to convert syntax of the regular ruby array to percent ruby array.
+VS Code extension that helps easily convert regular ruby arrays to percent ruby arrays.
 
 ### Examples:
-
-  - from `["foo", "bar", "baz"]` to `%w(foo bar baz)`
-  - from `[:foo, :bar, :baz]` to `%i(foo bar baz)`
+  - `["foo", "bar", "baz"]` -> `%w(foo bar baz)`
+  - `[:foo, :bar, :baz]` -> `%i(foo bar baz)`
