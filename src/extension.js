@@ -12,7 +12,7 @@ const activate = (context) => {
   const config = vscode.workspace.getConfiguration('ruby-percent-strings')
 
   const convertStringArray = (text) => {
-    const escapedText = text.replace(/[[\]",]/gi, '')
+    const escapedText = text.replace(/[[\]"',]/gi, '')
     let result = null
 
     if (config.get('stringBrackets') === 'square') {

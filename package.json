@@ -2,7 +2,7 @@
   "name": "ruby-percent-strings",
   "displayName": "Ruby Percent Strings",
   "description": "VS Code extension which helps easily to convert syntax of the regular ruby array to percent ruby array.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "oostach",
   "license": "MIT",
   "repository": "https://github.com/oostach/ruby-percent-strings",
