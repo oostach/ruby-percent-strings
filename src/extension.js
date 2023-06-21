@@ -11,6 +11,20 @@ const vscode = require('vscode')
 const activate = (context) => {
   const config = vscode.workspace.getConfiguration('ruby-percent-strings')
 
+  const toggleQuotes = (text) => {
+    let result = null
+
+    if ([...text.matchAll(/\'/ig)].length > 1) {
+      result = text.replace(/[']/gi, '"')
+    } else if ([...text.matchAll(/\"/ig)].length > 1) {
+      result = text.replace(/["]/gi, "'")
+    } else {
+      result = text
+    }
+
+    return result
+  }
+
   const convertStringArray = (text) => {
     const escapedText = text.replace(/[[\]"',]/gi, '')
     let result = null
@@ -70,6 +84,10 @@ const activate = (context) => {
 
   context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.convertToSymbolsArray', () => {
     convertArray(convertSymbolArray)
+  }))
+
+  context.subscriptions.push(vscode.commands.registerCommand('ruby-percent-strings.toggleQuotes', () => {
+    convertArray(toggleQuotes)
   }))
 }
 

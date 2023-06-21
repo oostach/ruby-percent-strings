@@ -2,7 +2,7 @@
   "name": "ruby-percent-strings",
   "displayName": "Ruby Percent Strings",
   "description": "VS Code extension which helps easily to convert syntax of the regular ruby array to percent ruby array.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "oostach",
   "license": "MIT",
   "repository": "https://github.com/oostach/ruby-percent-strings",
@@ -24,6 +24,10 @@
       {
         "command": "ruby-percent-strings.convertToSymbolsArray",
         "title": "Ruby Percent Strings: Convert to Symbols Array"
+      },
+      {
+        "command": "ruby-percent-strings.toggleQuotes",
+        "title": "Ruby Percent Strings: Toggle Quotes"
       }
     ],
     "keybindings": [
@@ -37,6 +41,12 @@
         "command": "ruby-percent-strings.convertToSymbolsArray",
         "key": "ctrl+alt+i",
         "mac": "ctrl+alt+i",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "ruby-percent-strings.toggleQuotes",
+        "key": "ctrl+alt+q",
+        "mac": "ctrl+alt+q",
         "when": "editorTextFocus"
       }
     ],
